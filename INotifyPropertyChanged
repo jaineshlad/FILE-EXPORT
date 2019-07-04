@@ -1,0 +1,12 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+public event PropertyChangedEventHandler PropertyChanged;
+
+private void NotifyChange([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        
+        
+ public BindingList<string> Numbers { get; set; } = new BindingList<string>();
