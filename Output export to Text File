@@ -1,0 +1,16 @@
+ if (TotalPaymentDetails.Length == 0 || TotalDaysOfWorking.Length == 0 || Numbers.Count == 0)
+            {
+                MessageBox.Show("No Value To Export");
+                return;
+            }
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SalaryCalculator");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            string file = System.IO.Path.Combine(path, OUTPUT_FILE);
+            var dateAndTime = DateTime.Now;
+            var date = dateAndTime.Date;
+            var time = dateAndTime.TimeOfDay;
+            string strdatetime = "DATE&TIME:" + date.ToString("dd/MM/yyyy") + " " + time.Hours.ToString() + ":" + time.Minutes.ToString() + "\t" + "Number Of Days Worked:" + TotalDaysOfWorking;
+            File.AppendAllText(file, strdatetime + "\t");
+            File.AppendAllText(file, "Total pay: " + TotalPaymentDetails + "\n");
+            MessageBox.Show("Export Successfull");
